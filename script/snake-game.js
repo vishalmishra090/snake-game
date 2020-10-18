@@ -1,5 +1,5 @@
-$("#node0").css({
-  top: "48%",
+$("#node1").css({
+  top: "40%",
   left: "48%",
 });
 
@@ -15,85 +15,72 @@ let prevCssLeft = null;
 let nextCssTop = null;
 let nextCssLeft = null;
 
-
-
 let snake = [
   {
-    nodeId: "node" + totalNode,
-    cssTop: 48,
+    cssTop: 40,
     cssLeft: 48,
-    prevNode: null,
-    nextNode: null,
   },
 ];
 
 let targetNode = {
-  nodeId: null,
   cssTop: null,
   cssLeft: null,
-  prevNode: totalNode - 1,
-  nextNode: null,
 };
 
 function changeTargetNodePos() {
-  let rndmTop = Math.floor(Math.random() * 97);
-  let rndmLeft = Math.floor(Math.random() * 97);
+  let rndmTop = Math.floor(Math.random() * 25);
+  let rndmLeft = Math.floor(Math.random() * 25);
   $("#targetNode").css({
-    csstop: rndmTop + "%",
-    cssleft: rndmLeft + "%",
+    top: rndmTop * 4 + "%",
+    left: rndmLeft * 4 + "%",
   });
-  targetNode.cssTop = rndmTop;
-  targetNode.cssLeft = rndmLeft;
+  targetNode.cssTop = rndmTop * 4;
+  targetNode.cssLeft = rndmLeft * 4;
 }
 
 function moveUp() {
-   prevCssTop = snake[totalNode - 1].cssTop;
-   prevCssLeft = snake[totalNode - 1].cssLeft;
-   $("#node" + (totalNode - 1)).css({
-     top: snake[totalNode - 1].cssTop + UP + "%",
-     left: snake[totalNode - 1].cssLeft + "%",
-   });
-   snake[totalNode - 1].cssTop += UP;
-   updatePrevNode();
+  prevCssTop = snake[totalNode - 1].cssTop;
+  prevCssLeft = snake[totalNode - 1].cssLeft;
+  $("#node" + totalNode).css({
+    top: snake[totalNode - 1].cssTop + UP + "%",
+    left: snake[totalNode - 1].cssLeft + "%",
+  });
+  snake[totalNode - 1].cssTop += UP;
 }
 
 function moveLeft() {
   prevCssTop = snake[totalNode - 1].cssTop;
   prevCssLeft = snake[totalNode - 1].cssLeft;
-  $("#node" + (totalNode - 1)).css({
+  $("#node" + totalNode).css({
     top: snake[totalNode - 1].cssTop + "%",
     left: snake[totalNode - 1].cssLeft + LEFT + "%",
   });
   snake[totalNode - 1].cssLeft += LEFT;
-  updatePrevNode();
 }
 
 function moveRigth() {
-   prevCssTop = snake[totalNode - 1].cssTop;
-   prevCssLeft = snake[totalNode - 1].cssLeft;
-   $("#node" + (totalNode - 1)).css({
-     top: snake[totalNode - 1].cssTop + "%",
-     left: snake[totalNode - 1].cssLeft + RIGHT + "%",
-   });
-   snake[totalNode - 1].cssLeft += RIGHT;
-   updatePrevNode();
+  prevCssTop = snake[totalNode - 1].cssTop;
+  prevCssLeft = snake[totalNode - 1].cssLeft;
+  $("#node" + totalNode).css({
+    top: snake[totalNode - 1].cssTop + "%",
+    left: snake[totalNode - 1].cssLeft + RIGHT + "%",
+  });
+  snake[totalNode - 1].cssLeft += RIGHT;
 }
 
 function moveDown() {
   prevCssTop = snake[totalNode - 1].cssTop;
   prevCssLeft = snake[totalNode - 1].cssLeft;
-  $("#node" + (totalNode - 1)).css({
+  $("#node" + totalNode).css({
     top: snake[totalNode - 1].cssTop + DOWN + "%",
     left: snake[totalNode - 1].cssLeft + "%",
   });
   snake[totalNode - 1].cssTop += DOWN;
-  updatePrevNode();
 }
-
 
 function moveSnake() {
   if (direction == "up") {
-     moveUp();
+    moveUp();
   }
 
   if (direction == "left") {
@@ -101,17 +88,20 @@ function moveSnake() {
   }
 
   if (direction == "right") {
-   moveRigth();
+    moveRigth();
   }
 
   if (direction == "down") {
     moveDown();
   }
+
+  updatePrevNode();
+  addNewNode();
 }
 
 function updatePrevNode() {
-  for (let i = totalNode - 2; i >= 0; i++) {
-    $("#node" + i).css({
+  for (let i = totalNode - 2; i >= 0; i--) {
+    $("#node" + (i + 1)).css({
       top: prevCssTop + "%",
       left: prevCssLeft + "%",
     });
@@ -121,6 +111,31 @@ function updatePrevNode() {
     prevCssLeft = snake[i].cssLeft;
     snake[i].cssTop = nextCssTop;
     snake[i].cssLeft = nextCssLeft;
+  }
+}
+
+function addNewNode() {
+  let frontNodeTop = snake[totalNode - 1].cssTop;
+  let frontNodeLeft = snake[totalNode - 1].cssLeft;
+  let targetNodeTop = targetNode.cssTop;
+  let targetNodeLeft = targetNode.cssLeft;
+
+  if (
+    (frontNodeTop == targetNodeTop &&
+      (frontNodeLeft == targetNodeLeft - 4 ||
+        frontNodeLeft == targetNodeLeft + 4)) ||
+    (frontNodeLeft == targetNodeLeft &&
+      (frontNodeTop == targetNodeTop - 4 ||
+        frontNodeTop == targetNodeTop + 4))
+  ) {
+    $("#gamebox").append(
+      `<div class="nodes snakeNodes" id="node${totalNode + 1}" style="top:${targetNodeTop}%; left:${targetNodeLeft}%;"></div>`
+    );
+    totalNode++;
+    snake[totalNode-1] = {}
+    Object.assign(snake[totalNode-1],targetNode);
+    
+    changeTargetNodePos();
   }
 }
 
@@ -152,40 +167,41 @@ function startGame() {
   let timerId = setInterval(function () {
     moveSnake();
     gameOver(timerId);
-  }, 200);
+  }, 250);
 }
 
-function gameOver(timerId){
-    let cssTop = snake[totalNode-1].cssTop;
-    let cssLeft = snake[totalNode-1].cssLeft;
-    if(cssTop > 96 || cssTop < 0 || cssLeft > 96 || cssLeft < 0){
-       clearInterval(timerId);
-       setTimeout(function(){
-           restart();
-       },50);
+function gameOver(timerId) {
+  let cssTop = snake[totalNode - 1].cssTop;
+  let cssLeft = snake[totalNode - 1].cssLeft;
+  if (cssTop > 96 || cssTop < 0 || cssLeft > 96 || cssLeft < 0) {
+    $("#node" + totalNode).css("display", "none");
+    clearInterval(timerId);
+    setTimeout(function () {
+      restart();
+    }, 50);
+  }
+}
+
+function restart() {
+  $("#node1").css({
+    top: "48%",
+    left: "48%",
+    display: "block",
+  });
+  snake[0].cssTop = 48;
+  snake[0].cssLeft = 48;
+  $(document).on("keydown", function (event) {
+    if (event.keyCode == 38) {
+      $(this).off();
+      startGame();
     }
+  });
 }
 
-function restart(){
-    $("#node0").css({
-      top: "48%",
-      left: "48%",
-    });
-    snake[0].cssTop = 48;
-    snake[0].cssLeft = 48;
-    $(document).on("keydown", function (event) {
-      if (event.keyCode == 38) {
-        $(this).off();
-        startGame();
-      }
-    });
-}
-
- $(document).on("keydown", function (event){
-   if(event.keyCode == 38){
-       $(this).off();
-       startGame();
-   }
- });
-
-
+$(document).on("keydown", function (event) {
+  if (event.keyCode == 38) {
+    $(this).off();
+    changeTargetNodePos();
+    startGame();
+  }
+});
