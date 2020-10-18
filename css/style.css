@@ -1,0 +1,63 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+main{
+    /* max-width: 800px;
+    position: relative;
+    margin: auto; */
+    height: 100%;
+}
+
+
+#game-container {
+  position: relative;
+  max-width: 500px;
+  background-color: pink;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#wrapbox {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+}
+
+#gamebox {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(206, 255, 206);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.nodes{
+  position: absolute;
+  width: 4%;
+  height: 4%;
+}
+
+#targetNode {
+  background-color: red;
+}
+
+.snakeNodes{
+  background-color: black;
+}
