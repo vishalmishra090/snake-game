@@ -4,17 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Play Snake Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="shortcut icon" href="images/snake.svg" type="image/x-icon">
 </head>
 <body>
+   <div id="home-container">
+       <div id="home">
+           <div id="game-logo">
+               <div id="game-img"> 
+                   <img src="images/snake.svg" alt="Play Snake Game">
+               </div>
+               <div id="game-title">
+                   Play Snake Game
+               </div>
+           </div>
+           <button id="startGame">Start</button>
+       </div>
+       <div id="owner">Made By <a href="https://github.com/vishalmishra090">Vishal Mishra</a></div>
+   </div>
    <main>
        <div id="game-container">
            <div id="wrapbox">
-              <div id="gamebox">
-                 <div id="targetNode" class="nodes"></div>
-                 <div class="nodes snakeNodes" id="node1"></div>
-              </div>
+               <div id="gameBox">
+                   <div id="scoreArea" class = "row"></div>
+                   <div id="gameArea"  class = "row">
+        
+                   </div>
+               </div>
            </div>
+       </div>
+       <div id="buttonArea">
+           <div id="btnRow1" class="btn">
+               <button id="restart">R</button>
+               <button id="up">UP</button>
+               <button id="sound">S</button>
+           </div>
+           <div id="btnRow2" class="btn">
+               <button id="left">LEFT</button>
+               <button id="pause">P</button>
+               <button id="right">RIGHT</button>
+           </div>
+           <div id="btnRow3" class="btn">
+               <button id="down">DOWN</button>
+           </div>
+       </div>
+       <div id="playAgainBox">
+           <button id="playAgain">Play Again</button>
+       </div>
+       <div id="restartBox">
+           <p>Do You Want To Restart The Game?</p>
+           <button id="cancle">cancle</button>
+           <button id="ok">ok</button>
        </div>
    </main>
    <script src="script/jquery.min.js"></script>
