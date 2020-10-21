@@ -27,7 +27,10 @@
        <div id="game-container">
            <div id="wrapbox">
                <div id="gameBox">
-                   <div id="scoreArea" class = "row"></div>
+                   <div id="scoreArea" class = "row">
+                       <div id="score"></div>
+                       <div id="speed"></div>
+                   </div>
                    <div id="gameArea"  class = "row">
         
                    </div>
@@ -37,16 +40,16 @@
        <div id="buttonArea">
            <div id="btnRow1" class="btn">
                <button id="restart">R</button>
-               <button id="up">UP</button>
+               <button id="up">&#11014;</button>
                <button id="sound">S</button>
            </div>
            <div id="btnRow2" class="btn">
-               <button id="left">LEFT</button>
+               <button id="left">&#11013;</button>
                <button id="pause">P</button>
-               <button id="right">RIGHT</button>
+               <button id="right">&#10145;</button>
            </div>
            <div id="btnRow3" class="btn">
-               <button id="down">DOWN</button>
+               <button id="down">&#11015;</button>
            </div>
        </div>
        <div id="playAgainBox">
@@ -58,6 +61,14 @@
            <button id="ok">ok</button>
        </div>
    </main>
+   <div id="preload" style="display: none;">
+       <img src="images/play.svg">
+       <img src="images/pause.svg">
+       <img src="images/snake.svg">
+       <img src="images/restart.svg">
+       <img src="images/sound-on.svg">
+       <img src="images/sound-off.svg">
+   </div>
    <script src="script/jquery.min.js"></script>
    <script src="script/snake-game.js"></script>
 </body>
