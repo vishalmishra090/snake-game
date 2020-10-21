@@ -242,32 +242,44 @@ button:focus {
 }
 
 @media screen and (min-width: 300px) and (min-height: 500px) {
-  #buttonArea button {
+  #buttonArea button,#playAgain {
     padding: 10px 0px;
     font-size: 18px;
+  }
+  #playAgain{
+    width: 130px;
   }
 }
 
 @media screen and (min-width: 300px) and (min-height: 600px) {
-  #buttonArea button {
+  #buttonArea button,#playAgain {
     padding: 15px 0px;
     width: 80px;
     font-size: 20px;
+  }
+  #playAgain{
+    width: 130px;
   }
 }
 
 @media screen and (min-width: 300px) and (min-height: 700px) {
-  #buttonArea button {
+  #buttonArea button,#playAgain {
     padding: 15px 0px;
     width: 80px;
     font-size: 20px;
   }
+  #playAgain{
+    width: 130px;
+  }
 }
 
 @media screen and (min-width: 480px) {
-  #buttonArea button {
+  #buttonArea button,#playAgain {
     padding: 5px;
     width: 65px;
     font-size: 16px;
+  }
+  #playAgain{
+    width: 100px;
   }
 }
