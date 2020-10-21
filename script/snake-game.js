@@ -17,7 +17,6 @@ let snake = [];
 
 let targetNode = {};
 
-
 let eatAudio = new Audio("../audio/eat.wav");
 let gameOverAudio = new Audio("../audio/gameOver.mp3");
 
@@ -234,8 +233,8 @@ function newNode() {
 
 function changeSpeed() {
   if (totalNode % 7 == 0 && speed == 100 && speedNo == 4) {
-      speed = speed + 50;
-      $("#speed").text(`x${--speedNo}`);
+    speed = speed + 50;
+    $("#speed").text(`x${--speedNo}`);
   }
   if (totalNode % 5 == 0 && speed > 100) {
     speed = speed - 50;
@@ -326,6 +325,7 @@ function gameOver(timerId) {
 }
 
 function pauseGame() {
+  $("#pause").off();
   removeControl();
   if (timerId != null) {
     clearTimeout(timerId);
@@ -333,15 +333,40 @@ function pauseGame() {
   $("#pause").one("click", function () {
     playGame();
   });
+  $(document).off("keydown");
+  $(document).on("keydown", function (event) {
+    if (event.keyCode == 37) {
+      direction = "left"; // ArrowLeft
+      $(this).off();
+      playGame();
+    }
+    if (event.keyCode == 38) {
+      direction = "up"; // ArrowUp
+      $(this).off();
+      playGame();
+    }
+    if (event.keyCode == 39) {
+      direction = "right"; //ArrowRight
+      $(this).off();
+      playGame();
+    }
+    if (event.keyCode == 40) {
+      direction = "down"; // ArrowDown
+      $(this).off();
+      playGame();
+    }
+  });
   $("#pause").css("background-image", "url(../images/play.svg)");
 }
 
 function playGame() {
+  $("#pause").off();
+  $("#restartBox").css("display", "none");
   addControl();
   timerId = setTimeout(run, speed);
   $("#pause").one("click", function () {
-    pauseGame();
-  });
+      pauseGame();
+    });
   $("#pause").css("background-image", "url(../images/pause.svg)");
 }
 
@@ -358,6 +383,7 @@ function addControl() {
   $("#down").click(() => (direction = "down"));
   $("#left").click(() => (direction = "left"));
   $("#right").click(() => (direction = "right"));
+  $(document).off("keydown");
   $(document).on("keydown", function (event) {
     if (event.keyCode == 37) direction = "left"; // ArrowLeft
     if (event.keyCode == 38) direction = "up"; // ArrowUp
@@ -401,18 +427,20 @@ $("#cancle").click(() => {
 
 /* sound */
 
-function muteAudio(){
-    $("#sound").css("background-image", "url(../images/sound-off.svg)");
-    eatAudio.muted = true;
-    gameOverAudio.muted = true;
-    $("#sound").one("click", () => unmuteAudio());
+function muteAudio() {
+  $("#sound").css("background-image", "url(../images/sound-off.svg)");
+  eatAudio.muted = true;
+  gameOverAudio.muted = true;
+  $("#sound").one("click", () => unmuteAudio());
 }
 
-function unmuteAudio(){
-   $("#sound").css("background-image", "url(../images/sound-on.svg)");
-   eatAudio.muted = false;
-   gameOverAudio.muted = false; 
-   $("#sound").one("click", () => muteAudio());
+function unmuteAudio() {
+  $("#sound").css("background-image", "url(../images/sound-on.svg)");
+  eatAudio.muted = false;
+  gameOverAudio.muted = false;
+  $("#sound").one("click", () => muteAudio());
 }
 
 $("#sound").one("click", () => muteAudio());
+
+
