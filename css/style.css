@@ -23,7 +23,7 @@ main {
 #game-container {
   position: relative;
   max-width: 500px;
-  background-color: transparent
+  background-color: transparent;
   top: 0%;
   left: 50%;
   transform: translate(-50%, 0%);
