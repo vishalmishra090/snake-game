@@ -135,7 +135,10 @@ button:focus {
 
 #pause,
 #restart,
-#sound {
+#sound,
+#fullscreen,
+#none
+{
   background-position: center;
   background-size: 30%;
   background-repeat: no-repeat;
@@ -152,6 +155,9 @@ button:focus {
 
 #sound {
   background-image: url(../images/sound-on.svg);
+}
+#fullscreen{
+   background-image: url(../images/fullscreen.svg);
 }
 
 #home-container {
@@ -234,6 +240,7 @@ button:focus {
 #playAgain {
   width: 100px;
 }
+
 
 @media screen and (max-width: 500px){
   body{
