@@ -460,7 +460,20 @@ function openFullscreen() {
     /* IE/Edge */
     elem.msRequestFullscreen();
   }
+  $("#fullscreen").css("display", "none");
+   $("#none").css("display","none");
 }
+
+document.addEventListener("fullscreenchange", (event) => {
+  if (document.fullscreenElement) {
+     $("#fullscreen").css("display", "none");
+     $("#none").css("display", "none");
+  } else {
+    $("#fullscreen").css("display", "inline-block");
+    $("#none").css("display", "inline-block");
+  }
+});
+
 
 $("#fullscreen").click(function () {
   openFullscreen();
