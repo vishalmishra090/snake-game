@@ -444,3 +444,39 @@ function unmuteAudio() {
 $("#sound").one("click", () => muteAudio());
 
 
+/* FullScreen */
+
+let elem = document.documentElement;
+function openFullscreen() {
+  if (elem.requestFullscreen) {
+    elem.requestFullscreen();
+  } else if (elem.mozRequestFullScreen) {
+    /* Firefox */
+    elem.mozRequestFullScreen();
+  } else if (elem.webkitRequestFullscreen) {
+    /* Chrome, Safari & Opera */
+    elem.webkitRequestFullscreen();
+  } else if (elem.msRequestFullscreen) {
+    /* IE/Edge */
+    elem.msRequestFullscreen();
+  }
+  $("#fullscreen").css("visibility", "hidden");
+   $("#none").css("visibility", "hidden");
+}
+
+document.addEventListener("fullscreenchange", (event) => {
+  if (document.fullscreenElement) {
+    $("#fullscreen").css("visibility", "hidden");
+     $("#none").css("visibility", "hidden");
+  } else {
+    $("#fullscreen").css("visibility", "visible");
+     $("#none").css("visibility", "visible");
+  }
+});
+// visibility: hidden;
+  // visibility: visible;
+
+$("#fullscreen").click(function () {
+  openFullscreen();
+});
+
