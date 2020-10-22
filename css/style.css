@@ -240,6 +240,12 @@ button:focus {
 #playAgain {
   width: 100px;
 }
+@media all and (display-mode: fullscreen) {
+  #fullscreen,
+  #none{
+    display: none;
+  }
+}
 
 
 @media screen and (max-width: 500px){
