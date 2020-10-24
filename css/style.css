@@ -17,7 +17,10 @@ body {
 
 main {
   display: none;
+  max-width: 550px;
   height: 100%;
+  margin: auto;
+  background-color: blue;
 }
 
 #game-container {
