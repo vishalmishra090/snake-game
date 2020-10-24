@@ -277,7 +277,7 @@ function playAgain() {
   $("#pause").off();
   totalNode = 1;
   direction = "up";
-  lprevCssTop = null;
+  prevCssTop = null;
   prevCssLeft = null;
   nextCssTop = null;
   nextCssLeft = null;
