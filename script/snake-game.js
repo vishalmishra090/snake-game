@@ -401,7 +401,7 @@ function restartGame() {
   $("#gameArea").empty();
   totalNode = 1;
   direction = "up";
-  lprevCssTop = null;
+  prevCssTop = null;
   prevCssLeft = null;
   nextCssTop = null;
   nextCssLeft = null;
